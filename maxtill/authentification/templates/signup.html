@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="contact_section layout_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- Carousel Section -->
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <!-- Indicator items will be added dynamically -->
+                        </ol>
+                        <div class="carousel-inner">
+                            <!-- Carousel items will be added dynamically -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <!-- Sign Up Form Section -->
+                    <div class="mail_section">
+                        <h1 class="contact_taital">Sign Up</h1>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type="text" class="email_text" placeholder="Name" name="username" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="email_text" placeholder="Phone" name="phone" pattern="[0-9]{10}" title="Le numéro de téléphone doit contenir 10 chiffres" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="email_text" placeholder="Email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="email_text" placeholder="Password" name="password" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="email_text" placeholder="Confirm Password" name="confirm_password" required>
+                            </div>
+
+                            <button type="submit" class="send_bt">Sign Up</button>
+                        </form>
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }}" role="alert">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <div class="text-center mt-3">
+                        <p>Already have an account? <a href="{% url 'authentification' %}">Sign in</a></p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/jquery-3.0.0.min.js' %}"></script>
+    <script src="{% static 'js/plugin.js' %}"></script>
+    <script src="{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+</body>
+</html>

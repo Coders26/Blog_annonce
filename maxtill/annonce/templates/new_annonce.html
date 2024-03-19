@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Bloscot{% endblock %}</title>
+    <link rel="icon" href="{% static 'images/fevicon.png' %}" type="image/gif" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.min.css' %}">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="header_section">
+        <div class="container-fluid header_main">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="logo" href="index.html"><img src="{% static 'images/logo.png' %}"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav pull-right">
+                        <li class="active"><a class="nav-link text-white" href="#">Bienvenue, {{ user.username }}</a></li>
+                        <li class="active"><a class="nav-link text-white" href="{% url 'index' %}">Accueil</a></li>
+                        <li><a class="nav-link text-white" href="{% url 'annonce' %}">Annonces</a></li>
+                        <li><a class="nav-link text-white" href="{% url 'contact' %}">Contact</a></li>
+                        {% if user.is_authenticated %}
+                            <li><a class="btn nav-link text-white" href="{% url 'new_annonce' %}">Créer annonce</a></li>
+                            <li><a class="btn nav-link text-white" href="{% url 'logout' %}">Logout</a></li>
+                        {% else %}
+                            <li><a class="btn nav-link text-white" href="{% url 'authentification' %}">Connexion / Inscription</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>    <!-- /.navbar -->
+    <header id="head" class="secondary"></header>
+
+
+    <!-- container -->
+    <div class="container">
+
+        <ol class="breadcrumb">
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li class="active">Creer</li>
+        </ol>
+
+        <div class="row">
+
+<div class="newannonce-form">
+    <h3>Ajouter une nouvelle annonce :</h3>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="title">Titre de l'annonce:</label>
+            <input type="text" class="form-control email_text" id="title" name="title" placeholder="Entrez le titre" required>
+        </div>
+        <div class="form-group">
+            <label for="image">Image de l'annonce:</label>
+            <input type="file" class="form-control email_text" id="image" name="image" accept="image/*" placeholder="Choisissez une image" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description de l'annonce:</label>
+            <textarea class="form-control email_text" id="description" name="description" rows="3" placeholder="Entrez la description" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="contenu">Contenu de l'annonce:</label>
+            <textarea class="form-control email_text" id="contenu" name="contenu" rows="5" placeholder="Entrez le contenu" required></textarea>
+        </div>
+        <button type="submit" class="btn send_bt">Envoyer</button>
+    </form>
+</div>
+
+ <!-- /container -->
+    <div class="footer_section layout_padding">
+        <div class="container">
+            <div class="footer_logo"><a href="{% url 'index' %}"><img src="{% static 'images/footer-logo.png' %}"></a></div>
+            <div class="footer_menu">
+                <ul>
+                    <li><a href="{% url 'index' %}">Accueil</a></li>
+                    <li><a href="{% url 'annonce' %}">Annonces</a></li>
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                </ul>
+            </div>
+            <div class="contact_menu">
+                <ul>
+                    <li><a href="#"><img src="{% static 'images/call-icon.png' %}"></a></li>
+                    <li><a href="#">Call : {{ infos.phone }}</a></li>
+                    <li><a href="#"><img src="{% static 'images/mail-icon.png' %}"></a></li>
+                    <li><a href="mailto:{{ infos.email }}">{{ infos.email }}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- footer section end -->
+    <!-- copyright section start -->
+    <div class="copyright_section">
+        <div class="container">
+            <p class="copyright_text">Copyright 2024 All Right Reserved By.
+                <a href="https://html.design"> Free  html Templates</a>
+            </p>
+        </div>
+    </div>
+    <!-- copyright section end -->
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="{% static 'assets/js/headroom.min.js' %}"></script>
+    <script src="{% static 'assets/js/jQuery.headroom.min.js' %}"></script>
+    <script src="{% static 'assets/js/template.js' %}"></script>
+
+   </body>
+   </html>
